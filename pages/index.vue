@@ -78,6 +78,13 @@ export default {
   async mounted(){
     this.$store.dispatch('categories/fetchCategories')
     this.$store.dispatch('course/fetchCourse')
+
+            this.$store.dispatch('header/setColors',{
+            bg:'#0B0D34',
+            burger:'#fff',
+            nav:'#fff'
+        })
+        
   },
 
   computed:{

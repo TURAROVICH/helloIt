@@ -76,6 +76,9 @@ export default {
         modal:false,
 
     }),
+    mounted(){
+        
+    },
  computed:{
         burgerLine(){
             return this.$store.getters['header/getBurger']
