@@ -14,6 +14,17 @@
     </div>
 </template>
 
+<script>
+export default {
+    mounted(){
+        this.$store.dispatch('header/setColors',{
+            bg:'#FFFDF4',
+            burger:'#0B0D34',
+            nav:'#0B0D34'
+        })
+    }
+}
+</script>
 
 <style scoped>
 .grid{

@@ -3,13 +3,13 @@
          <transition name="slide-fade">
             <header-modal v-if="modal" @close="modal=false"/>
          </transition>
-        <div :class="{'header-active':bg}" class="header-wrapper">
+        <div :style="{'background':$store.getters['header/getBg']}" class="header-wrapper">
        <div class="header" >
 
            <div @click="modal=true" class="burger">
-               <div class="burger-line"></div>
-               <div class="burger-line"></div>
-               <div class="burger-line"></div>
+               <div class="burger-line" :style="{'background':burgerLine}"></div>
+               <div class="burger-line" :style="{'background':burgerLine}"></div>
+               <div class="burger-line" :style="{'background':burgerLine}"></div>
            </div>
 
 
@@ -18,10 +18,10 @@
            </div>
 
            <div class="nav">
-                <div :class="{'n-active':!bg}" class="link">Жаңылыктар</div>
-                <div :class="{'n-active':!bg}" class="link">Маектер</div>
-                <div :class="{'n-active':!bg}"  class="link"> Жарнамалар</div>
-                <div :class="{'n-active':!bg}" class="link">Байланыш</div>
+                <div :style="{'color':getNav}" class="link">Жаңылыктар</div>
+                <div :style="{'color':getNav}" class="link">Маектер</div>
+                <div :style="{'color':getNav}"  class="link"> Жарнамалар</div>
+                <div :style="{'color':getNav}" class="link">Байланыш</div>
            </div>
 
            <div class="login">
@@ -73,14 +73,18 @@
 <script>
 export default {
     data:()=>({
-        bg:true,
-        modal:false
+        modal:false,
+
     }),
-    mounted(){
-       if(this.$route.path != '/'){
-           this.bg=false
-       }
+ computed:{
+        burgerLine(){
+            return this.$store.getters['header/getBurger']
+        },
+        getNav(){
+            return this.$store.getters['header/getNav']
+        }
     }
+   
 }
 </script>
 
