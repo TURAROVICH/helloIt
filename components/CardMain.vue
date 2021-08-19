@@ -1,20 +1,20 @@
 <template>
-    <div class="card">
+    <div  @click="$router.push(`course/${id}/video`)" class="card">
                 <div class="img">
-                <img src="@/assets/imgs/test.png" alt="">
+                <img :src="image" alt="">
                 </div>
 
                 <div class="card-content">
                     <div class="card-des">
-                      Чет өлкөдө окуу
+                      {{name}}
                     </div>
                     <div class="card-title">
-                      Doni Kyrgyz дан интервьюлар
+                      {{description.length > 20 ? description.slice(0,18) +'...' :description}}
                     </div>
 
                     <div class="flex">
-                      <div class="card-about">12 видео сабак</div>
-                      <div class="card-about">0 Тест</div>
+                      <div class="card-about">{{videoCount}} видео сабак</div>
+                      <div class="card-about">{{testCount}} Тест</div>
 
                     </div>
                 </div>
@@ -22,10 +22,23 @@
 </template>
 
 
+<script>
+export default {
+  props:[
+    'image',
+    'name',
+    'description',
+    'video-count',
+    'test-count',
+    'id'
+  ]
+}
+</script>
+
 <style scoped>
 
 .card{
-  width: 285px;
+  width:285px;
   height: 370px;
   background: #CFD8DC;
   border-radius: 5px;

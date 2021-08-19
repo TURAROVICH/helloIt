@@ -5,7 +5,7 @@
                 <div class="border-wrapper">
                     <div class="content">
                         <div class="title">
-                            Англис тили Рахат менен
+                           {{courseData.name}}
                         </div>
                         <ul>
                             <li>
@@ -14,16 +14,16 @@
                             </li>
                              <li>
                                 <img src="@/assets/imgs/vidoe.png" alt="">
-                                <span >36 видео сабак</span>
+                                <span >{{courseData.video_count}} видео сабак</span>
                             </li>
                              <li>
                                 <img src="@/assets/imgs/testc.png" alt="">
-                                <span>2 Тест</span>
+                                <span>{{courseData.test_count}} Тест</span>
                             </li>
                         </ul>
                     </div>
 
-                    <img src="@/assets/imgs/Conteinerimage.png" alt="">
+                    <img width="331" :src="courseData.icon" alt="">
                 </div>
             </div>
             <div class="rectangle">
@@ -31,15 +31,15 @@
                     <div class="rectangle-container">
                         <div class="card">
                             <img src="@/assets/imgs/people.png" alt="">
-                            <span>73</span>
+                            <span>{{courseData.views}}</span>
                         </div>
                         <div class="card">
                             <img src="@/assets/imgs/star.png" alt="">
-                            <span>73</span>
+                            <span>{{courseData.rating}}</span>
                         </div>
                         <div class="card">
                             <img src="@/assets/imgs/heart.png" alt="">
-                            <span>73</span>
+                            <span>{{courseData.likes}}</span>
                         </div>
                     </div>
                 </div>
@@ -49,8 +49,8 @@
                 <div class="views-wrapper">
                     <div class="views-container">
                         <div class="links">
-                            <nuxt-link active-class="active"  to="/course/video" class="deafult">Видео сабактар</nuxt-link>
-                            <nuxt-link active-class="active" to="/course/tests" class="deafult">Тесттер</nuxt-link>
+                            <nuxt-link active-class="active"  :to="`/course/${routeid}/video`" class="deafult">Видео сабактар</nuxt-link>
+                            <nuxt-link active-class="active" :to="`/course/${routeid}/tests`" class="deafult">Тесттер</nuxt-link>
                             <nuxt-link active-class="active" to="#" class="deafult">Кошумча материалдар</nuxt-link>
                         </div>
 
@@ -74,12 +74,34 @@
 
 <script>
 export default {
+    data:()=>({
+        courseData:{}
+    }),
     mounted(){
         this.$store.dispatch('header/setColors',{
             bg:'#fff',
             burger:'#0B0D34',
             nav:'#0B0D34'
         })
+        let all = this.$store.getters['course/allCourse']
+        for(let i of all){
+           if(i.id == this.$route.params.id){
+               this.courseData = i
+               break;
+           }
+        }
+        
+            
+
+
+
+        
+    },
+
+    computed:{
+        routeid(){
+            return this.$route.params.id
+        }
     }
 }
 </script>

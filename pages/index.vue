@@ -22,7 +22,16 @@
 
 
             <div class="grid">
-                <CardMain v-for="i of 4" :key="i"/>
+                <CardMain 
+                
+                v-for="(i,k) in courses" 
+                :image="i.icon"
+                :name="i.name"
+                :description="i.description"
+                :video-count="i.video_count"
+                :test-count="i.test_count"
+                :id="i.id"
+                :key="k"/>
             </div>
          </div>
 
@@ -31,7 +40,14 @@
 
 
             <div class="grid">
-                <CardMain v-for="i of 4" :key="i"/>
+                <CardMain v-for="(i,k) in courses"
+                :image="i.icon"
+                :name="i.name"
+                :description="i.description"
+                :video-count="i.video_count"
+                :test-count="i.test_count"
+                :id="i.id"
+                 :key="k"/>
             </div>
          </div>
 
@@ -40,26 +56,58 @@
 
 
             <div class="grid-category">
-               <category v-for="i of 6" :key="i" />
+               <category
+                v-for="(i,k) in categories"
+                :key="k" 
+                :color="i.color"
+                :name="i.name"
+                :image="i.icon"
+                :id="i.id"
+               />
             </div>
          </div>
       </div>
   </div>
 </template>
 
+<script>
+export default {
+  data:()=>({
+    
+  }),
+  async mounted(){
+    this.$store.dispatch('categories/fetchCategories')
+    this.$store.dispatch('course/fetchCourse')
+  },
+
+  computed:{
+    courses(){
+      const course = this.$store.getters['course/allCourse']
+      let j = 0
+      let six =[]
+      for(let i in course){
+        j+=1
+        six.push(course[i])
+        if(j==6) {
+          break;
+        }
+      }
+      return six
+    },
+
+    categories(){
+      return this.$store.getters['categories/allCategories']
+    }
+  }
+
+
+  
+  
+}
+</script>
+
 
 <style scoped>
-
-
-
-
-
-
-
-
-
-
-
 
 
 .main{
@@ -166,7 +214,8 @@ margin:  0 0 40px 0;
 }
 .grid{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(6,1fr );
+  gap: 20px;
   grid-gap: 20px;
 }
 
