@@ -24,7 +24,9 @@
                 <div :style="{'color':getNav}" class="link">Байланыш</div>
            </div>
 
-           <div class="login">
+
+
+           <div @click="$router.push('/auth/register')" class="login">
                  <span>КИРҮҮ</span>
            </div>
        </div>
@@ -76,9 +78,6 @@ export default {
         modal:false,
 
     }),
-    mounted(){
-        
-    },
  computed:{
         burgerLine(){
             return this.$store.getters['header/getBurger']

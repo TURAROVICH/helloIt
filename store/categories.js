@@ -12,7 +12,6 @@ export const actions = {
     fetchCategories({commit}){
         this.$axios('http://176.126.164.190:8000/api/bilimcategories/').then(data=>{
             commit('change',data.data)
-            console.log(data.data);
         })
     }
 }

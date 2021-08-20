@@ -1,0 +1,80 @@
+//vars
+$bl:#0B0D34;
+$wh:#fff;
+$sl:#7E7E7E;
+$gr:#21A95D;
+//endvars
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+//mixins
+
+@mixin  h1 {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 56px;
+    @content;
+
+}
+
+@mixin h2 {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 37px;
+    @content;
+
+}
+
+@mixin h3 {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+    @content;
+}
+
+@mixin h4 {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 26px;
+    @content;
+}
+
+@mixin h5 {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 26px;
+    @content;
+}
+
+@mixin h6 {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.01em;    
+}
+
+
+@mixin no-scroll {
+    /* width */
+&::-webkit-scrollbar {
+    display: none;
+}
+
+/* Track */
+&::-webkit-scrollbar-track {
+    display: none;
+}
+
+/* Handle */
+&::-webkit-scrollbar-thumb {
+  display: none;
+}
+}
