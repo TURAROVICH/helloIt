@@ -1,5 +1,16 @@
 <template>
     <div class="main-course">
+        <transition name="fade">
+        <slideModal  v-if="modal" 
+        @close="modal=false" 
+        :name="courseData.name"
+        :desc="courseData.description"
+        :t="courseData.telegram"
+        :p="courseData.phone"
+        :y="courseData.youtube"
+        :i="courseData.instagram"
+        />
+        </transition>
         <div class="wrapper">
             <div class="border">
                 <div class="border-wrapper">
@@ -8,9 +19,9 @@
                            {{courseData.name}}
                         </div>
                         <ul>
-                            <li>
-                                <img src="@/assets/imgs/info.png" alt="">
-                                <span>Информация о курсе</span>
+                            <li @click="modal=true">
+                                <img @click="modal=true" src="@/assets/imgs/info.png" alt="">
+                                <span @click="modal=true" >Информация о курсе</span>
                             </li>
                              <li>
                                 <img src="@/assets/imgs/vidoe.png" alt="">
@@ -55,7 +66,14 @@
                         </div>
 
                         <div class="view">
-                            <nuxt-child/>
+                            <nuxt-child
+                             :data="{
+                             count:courseData.video_count,
+                             icon:courseData.icon,
+                             name:courseData.name,
+                             desc:courseData.description,
+                             test_count:courseData.test_count}" 
+                             />
                         </div>
                     </div>
                 </div>
@@ -75,7 +93,8 @@
 <script>
 export default {
     data:()=>({
-        courseData:{}
+        courseData:{},
+        modal:false
     }),
     mounted(){
         this.$store.dispatch('header/setColors',{
@@ -83,13 +102,10 @@ export default {
             burger:'#0B0D34',
             nav:'#0B0D34'
         })
-        let all = this.$store.getters['course/allCourse']
-        for(let i of all){
-           if(i.id == this.$route.params.id){
-               this.courseData = i
-               break;
-           }
-        }
+        this.$axios.get('http://176.126.164.190:8000/api/bilimcourses/'+this.$route.params.id)
+            .then(data=>{
+                this.courseData = data.data
+            })
         
             
 
@@ -107,6 +123,13 @@ export default {
 </script>
 
 <style scoped>
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+  opacity: 0;
+}
 
 .like-comment{
     display: flex;

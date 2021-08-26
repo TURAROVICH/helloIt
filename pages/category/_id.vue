@@ -9,22 +9,31 @@
         </div>
 
         <div class="grid">
-            <CardMain v-for="i of 6" :key="i"
-                image="http://176.126.164.190:8000/media/education/images/fba4201738444cae87c00797800f1d10.png"
-                name="test"
-                description="test description"
-                video-count="5"
-                test-count="2"
-                id="#"
+            <CardMain v-for="i in categories" :key="i.id"
+                :image="i.icon"
+                :name="i.name"
+                :color="i.color"
+                :description="i.description"
+                :video-count="i.video_count"
+                :test-count="i.test_count"
+                :id="'#'"
             
              />
+        </div>
+        <div class="center">
+        <Loader/>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    
+    data:()=>({
+        courses:[],
+        next:null,
+        prev:'',
+        hasData:true
+    }),
     mounted(){
         this.$store.dispatch('header/setColors',{
             bg:'#FFFDF4',
@@ -32,12 +41,32 @@ export default {
             nav:'#0B0D34'
         })
 
+        this.$store.dispatch('onecategory/fetchCategory',this.$route.params.id)
+
 
     if(!this.$store.getters['categories/allCategories']){
             this.$store.dispatch('categories/fetchCategories')
     }
+
+
+    const target = document.querySelector('.lds-ring');
+    function handleIntersection(entries) {
+    entries.map((entry) => {
+    if (entry.isIntersecting) {
+     
+    } else {
+      
+    }
+    });
+    }
+
+    const observer = new IntersectionObserver(handleIntersection);
+    observer.observe(target)
     },
     computed:{
+        categories(){
+            return this.$store.getters['onecategory/category']
+        },
         ctg(){
                 let all = this.$store.getters['categories/allCategories']
                 let result = null
@@ -61,6 +90,11 @@ export default {
 </script>
 
 <style scoped>
+.center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .grid{
     display: grid;
     grid-template-columns: repeat(4 , 1fr);

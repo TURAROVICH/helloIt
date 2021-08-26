@@ -10,7 +10,7 @@ export const mutations = {
 
 export const actions = {
     fetchCategories({commit}){
-        this.$axios('http://176.126.164.190:8000/api/bilimcategories/').then(data=>{
+        this.$axios('http://176.126.164.190:8000/api/bilimcategories/',{mode:'no-cors'}).then(data=>{
             commit('change',data.data)
         })
     }

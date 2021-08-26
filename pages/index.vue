@@ -18,7 +18,7 @@
 
       <div class="nav">
          <div class="most">
-            <div class="title">Эң популярдуудалар</div>
+            <div class="title"><span>Эң популярдуудалар</span> <span @click="$router.push('/all')" class="view-all">Баарын коруу</span></div>
 
 
             <div class="grid">
@@ -31,6 +31,7 @@
                 :video-count="i.video_count"
                 :test-count="i.test_count"
                 :id="i.id"
+                :color="i.color"
                 :key="k"/>
             </div>
          </div>
@@ -47,6 +48,7 @@
                 :video-count="i.video_count"
                 :test-count="i.test_count"
                 :id="i.id"
+                :color="i.color"
                  :key="k"/>
             </div>
          </div>
@@ -181,13 +183,22 @@ font-weight: normal;
 font-size: 32px;
 line-height: 37px;
 /* identical to box height */
+display: flex;
+justify-content: space-between;
+align-items: center;
 
 
 /* BACKGROUND */
-
 color: #0B0D34;
 margin:  0 0 40px 0;
+
+
+
 }
+.view-all{
+  color:#21A95D;
+   font-size: 18px;
+ }
 /* width */
 .most .grid::-webkit-scrollbar {
   display: none;
@@ -265,5 +276,11 @@ margin:  0 0 40px 0;
     flex-wrap: wrap;
   }
 
+}
+
+@media screen and (max-width:461px) {
+  .title{
+    flex-direction: column;
+  }
 }
 </style>

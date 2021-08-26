@@ -1,7 +1,10 @@
 <template>
     <div class="main">
-        <div v-for="i of 5" :key="i" class="test">
-            <img src="@/assets/imgs/test2.png" alt="">
+        <div v-if="!data.test_count" class="no-test">
+            Азырынча тесттер жок
+        </div>
+        <div v-for="i of data.test_count" :key="i" class="test" @click="$router.push(`/test/${$route.params.id}/1`)">
+            <img :src="data.icon" width="130" alt="">
             <div class="content">
                 <div class="title">Аналогия тест</div>
                 <div class="question-count">Суроолордун саны: 15</div>
@@ -11,6 +14,11 @@
     </div>
 </template>
 
+<script>
+export default {
+    props:['data']
+}
+</script>
 
 <style scoped>
 .test{
@@ -21,6 +29,11 @@
     border-top: 1px solid  #E0E7EA;;
     padding: 30px 0 30px 0;
     gap: 30px;
+}
+.no-test{
+  color:#0B0D34;
+    text-align: center;
+ font-size: 20px;
 }
 .main{
     height: 420px;
@@ -87,5 +100,15 @@ line-height: 21px;
 color: #0B0D34;
 
 
+}
+
+@media screen and (max-width:620px) {
+  .test{
+    flex-direction: column;
+  }
+  .test img{
+    width: 100%;
+    height: 170px;
+  }
 }
 </style>

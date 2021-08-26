@@ -1,5 +1,5 @@
 <template>
-    <div  @click="$router.push(`course/${id}/video`)" class="card">
+    <div  @click="to" :style="{'background':color}" class="card">
                 <div class="img">
                 <img :src="image" alt="">
                 </div>
@@ -30,17 +30,26 @@ export default {
     'description',
     'video-count',
     'test-count',
-    'id'
-  ]
+    'id',
+    'color'
+  ],
+  methods:{
+    to(){
+      if(this.id != "#"){
+        this.$router.push(`course/${this.id}/video`)
+      }
+    }
+  }
 }
 </script>
 
 <style scoped>
-
+a{
+  text-decoration: none;
+}
 .card{
   width:285px;
   height: 370px;
-  background: #CFD8DC;
   border-radius: 5px;
   padding: 20px;
   
